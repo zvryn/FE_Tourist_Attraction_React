@@ -14,7 +14,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/trips", (req, res) => {
-  const keywords = req.query.keywords;
+  let keywords = req.query.keywords;
+
+  if (keywords === undefined) {
+    return res.status(400).json({
+      message: "Please send keywords parameter in the URL endpoint",
+    });
+  }
+
   const regexKeywords = keywords.split(" ").join("|");
   const regex = new RegExp(regexKeywords, "ig");
   const results = trips.filter((trip) => {
