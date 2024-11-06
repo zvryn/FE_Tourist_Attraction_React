@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import link from "../assets/link.png";
 
 const TripLists = () => {
   const [query, setQuery] = useState("");
   const [trips, setTrips] = useState([]);
+  const [copied, setCopied] = useState(null);
 
   //Function to Fetch Data from Server
 
@@ -28,6 +30,16 @@ const TripLists = () => {
 
   console.log(query);
   console.log(trips);
+
+  // Function to handle copying the URL to the clipboard
+  const handleCopyLink = (link, id) => {
+    navigator.clipboard.writeText(link).then(() => {
+      setCopied(id);
+      setTimeout(() => {
+        setCopied(null);
+      }, 15000); // Reset the copied state after 15 seconds
+    });
+  };
 
   return (
     <div className="flex flex-col justify-center items-center w-full lg:w-2/3">
@@ -68,25 +80,43 @@ const TripLists = () => {
               <p>{`หมวด:`} </p>
               <a href="#" className="underline ">{`${trip.tags}`}</a>
             </div>
-            <div className="flex space-x-2 mt-2">
-              <img
-                key={1}
-                src={trip.photos[1]}
-                alt="photo1"
-                className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
-              />
-              <img
-                key={2}
-                src={trip.photos[2]}
-                alt="photo2"
-                className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
-              />
-              <img
-                key={3}
-                src={trip.photos[3]}
-                alt="photo3"
-                className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
-              />
+            <div className="flex justify-between mt-2 items-end w-full">
+              <div className="flex space-x-2">
+                <img
+                  key={1}
+                  src={trip.photos[1]}
+                  alt="photo1"
+                  className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
+                />
+                <img
+                  key={2}
+                  src={trip.photos[2]}
+                  alt="photo2"
+                  className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
+                />
+                <img
+                  key={3}
+                  src={trip.photos[3]}
+                  alt="photo3"
+                  className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
+                />
+              </div>
+
+              <div>
+                <button
+                  onClick={() => handleCopyLink(trip.url, trip.eid)}
+                  className="text-sm text-blue-500 hover:underline flex items-center "
+                >
+                  <img
+                    src={link}
+                    alt="copy"
+                    className="w-8 h-8 rounded-full object-contain border-2 border-black"
+                  />
+                  {copied === trip.eid && (
+                    <span className="ml-2 text-green-500 text-xs">Copied!</span>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
