@@ -59,7 +59,7 @@ const TripLists = () => {
           <img
             src={trip.photos[0]}
             alt={trip.title}
-            className="w-full rounded-lg object-cover h-auto  lg:w-1/3"
+            className="w-full rounded-lg object-cover h-[300px] object-center  lg:w-1/3 lg:h-auto"
           />
           <div className=" w-full flex flex-col items-start text-left justify-between lg:ml-2">
             <h2 className="text-xl font-bold text-gray-800 sm:text-2xl lg:text-3xl">
@@ -105,15 +105,17 @@ const TripLists = () => {
               <div>
                 <button
                   onClick={() => handleCopyLink(trip.url, trip.eid)}
-                  className="text-sm text-blue-500 hover:underline flex items-center "
+                  className="text-sm text-blue-500 hover:underline flex items-center justify-center  "
                 >
                   <img
                     src={link}
                     alt="copy"
-                    className="w-8 h-8 rounded-full object-contain border-2 border-black"
+                    className="hidden w-8 h-8 rounded-full object-contain border-2 border-black sm:flex"
                   />
                   {copied === trip.eid && (
-                    <span className="ml-2 text-green-500 text-xs">Copied!</span>
+                    <span className="hidden  ml-2 text-green-500 text-xs sm:flex">
+                      Copied!
+                    </span>
                   )}
                 </button>
               </div>
