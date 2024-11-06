@@ -30,7 +30,7 @@ const TripLists = () => {
   console.log(trips);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex flex-col justify-center items-center w-full lg:w-2/3">
       <input
         type="text"
         placeholder="หาที่เที่ยวแล้วไปกัน ..."
@@ -42,15 +42,17 @@ const TripLists = () => {
       {trips.map((trip) => (
         <div
           key={trip.eid}
-          className="mb-8 flex flex-col bg-white p-5 rounded-lg gap-3 border-black border"
+          className="mb-8 flex flex-col bg-white p-5 rounded-lg gap-5 border-black border sm:p-8 lg:flex-row"
         >
           <img
             src={trip.photos[0]}
             alt={trip.title}
-            className="w-full rounded-lg object-cover h-80"
+            className="w-full rounded-lg object-cover h-auto  lg:w-1/3"
           />
-          <div className=" w-full flex flex-col items-start text-left justify-start">
-            <h2 className="text-xl font-bold text-gray-800">{trip.title}</h2>
+          <div className=" w-full flex flex-col items-start text-left justify-between lg:ml-2">
+            <h2 className="text-xl font-bold text-gray-800 sm:text-2xl lg:text-3xl">
+              {trip.title}
+            </h2>
             <p className="text-gray-600 mt-2 line-clamp-3">
               {trip.description}
             </p>
@@ -71,19 +73,19 @@ const TripLists = () => {
                 key={1}
                 src={trip.photos[1]}
                 alt="photo1"
-                className="w-32 h-32 rounded-lg object-cover"
+                className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
               />
               <img
                 key={2}
                 src={trip.photos[2]}
                 alt="photo2"
-                className="w-32 h-32 rounded-lg object-cover"
+                className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
               />
               <img
                 key={3}
                 src={trip.photos[3]}
                 alt="photo3"
-                className="w-32 h-32 rounded-lg object-cover"
+                className="w-16 h-16 rounded-lg object-cover sm:w-32 sm:h-32"
               />
             </div>
           </div>
